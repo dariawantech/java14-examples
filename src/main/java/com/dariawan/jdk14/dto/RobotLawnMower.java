@@ -36,37 +36,11 @@
  *   https://creativecommons.org/licenses/by-sa/4.0/
  *   https://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
-package com.dariawan.jdk14;
+package com.dariawan.jdk14.dto;
 
-import com.dariawan.jdk14.dto.Robot;
-import com.dariawan.jdk14.dto.RobotLawnMower;
-import com.dariawan.jdk14.dto.RobotVacuumCleaner;
-import com.dariawan.jdk14.dto.RobotVendingMachine;
-
-public class BeforeJDK14Sample2 {
-
-    public void hiRobot(Robot robot) {
-        if (robot instanceof RobotVacuumCleaner) {
-            RobotVacuumCleaner vc = (RobotVacuumCleaner) robot;
-            vc.clean();
-        } 
-        else if (robot instanceof RobotLawnMower) {
-            RobotLawnMower lw = (RobotLawnMower) robot;
-            lw.mow();
-        } 
-        else if (robot instanceof RobotVendingMachine) {
-            RobotVendingMachine vm = (RobotVendingMachine) robot;
-            vm.serve();
-        }
-        else {
-            System.out.println("Unregistered robot...");
-        }
-    }
+public class RobotLawnMower extends Robot{
     
-    public static void main(String[] args) {
-        BeforeJDK14Sample2 sample = new BeforeJDK14Sample2();
-        sample.hiRobot(new RobotVacuumCleaner());
-        sample.hiRobot(new RobotLawnMower());
-        sample.hiRobot(new RobotVendingMachine("orange juice"));
+    public void mow() {
+        System.out.println(this.getName() + " mowing");
     }
 }

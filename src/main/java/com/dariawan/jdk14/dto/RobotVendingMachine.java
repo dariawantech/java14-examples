@@ -36,37 +36,67 @@
  *   https://creativecommons.org/licenses/by-sa/4.0/
  *   https://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
-package com.dariawan.jdk14;
+package com.dariawan.jdk14.dto;
 
-import com.dariawan.jdk14.dto.Robot;
-import com.dariawan.jdk14.dto.RobotLawnMower;
-import com.dariawan.jdk14.dto.RobotVacuumCleaner;
-import com.dariawan.jdk14.dto.RobotVendingMachine;
+import java.util.Objects;
 
-public class BeforeJDK14Sample2 {
-
-    public void hiRobot(Robot robot) {
-        if (robot instanceof RobotVacuumCleaner) {
-            RobotVacuumCleaner vc = (RobotVacuumCleaner) robot;
-            vc.clean();
-        } 
-        else if (robot instanceof RobotLawnMower) {
-            RobotLawnMower lw = (RobotLawnMower) robot;
-            lw.mow();
-        } 
-        else if (robot instanceof RobotVendingMachine) {
-            RobotVendingMachine vm = (RobotVendingMachine) robot;
-            vm.serve();
-        }
-        else {
-            System.out.println("Unregistered robot...");
-        }
+public class RobotVendingMachine extends Robot {
+    
+    private String item;
+    
+    public RobotVendingMachine(String item) {
+        this.item = item;
     }
     
-    public static void main(String[] args) {
-        BeforeJDK14Sample2 sample = new BeforeJDK14Sample2();
-        sample.hiRobot(new RobotVacuumCleaner());
-        sample.hiRobot(new RobotLawnMower());
-        sample.hiRobot(new RobotVendingMachine("orange juice"));
+    public void serve() {
+        System.out.println(this.getName() + " serving " + this.item);
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 31 * hash + Objects.hashCode(this.item);
+        return hash;
+    }
+
+//    @Override
+//    public boolean equals(Object obj) {
+//        if (this == obj) {
+//            return true;
+//        }
+//        if (obj == null) {
+//            return false;
+//        }
+//        if (obj instanceof RobotVendingMachine) {            
+//            final RobotVendingMachine other = (RobotVendingMachine) obj;
+//            if (!Objects.equals(this.item, other.item)) {
+//                return false;
+//            }
+//        }
+//        else {
+//            return false;
+//        }
+//        return true;
+//    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (obj instanceof RobotVendingMachine other) {
+            if (!Objects.equals(this.item, other.item)) {
+                return false;
+            }
+        }
+        else {
+            return false;
+        }
+
+        return true;
+    }
+    
 }
