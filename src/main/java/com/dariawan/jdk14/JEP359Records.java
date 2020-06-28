@@ -50,7 +50,7 @@ public class JEP359Records {
                 LocalDate.of(1997, Month.MAY, 7),
                 new Department(1, "IT - Application"));
         System.out.println(emp);
-        
-        // java --enable-preview com.dariawan.jdk14.JEP359Records
     }
+    
+    // java --enable-preview com.dariawan.jdk14.JEP359Records
 }

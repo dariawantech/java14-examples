@@ -38,21 +38,28 @@
  */
 package com.dariawan.jdk14;
 
-import com.dariawan.jdk14.dto.Employee;
-import java.time.LocalDate;
-import java.time.Month;
+import com.dariawan.jdk11.FibonacciEvent;
+import java.time.Duration;
+import jdk.jfr.consumer.RecordingStream;
 
-public class JEP358NullPointerExample {
-    
-    public static void main(String[] args) {
-        Employee emp = new Employee();
-        emp.setId(1001);
-        emp.setName("Clark Kent");
-        emp.setBirthDate(LocalDate.of(1974, Month.JUNE, 18));
- 
-        System.out.println(emp.getDepartment().getName());
+public class JEP349JFR {
+
+    public static void main(String[] args) throws InterruptedException {
+
+        try (var rs = new RecordingStream()) {
+            // rs.enable(FibonacciEvent.class);
+            rs.onEvent("Fibonacci", event -> {
+                System.out.println(event.getString("message"));
+            });
+
+            rs.startAsync();
+            for (int n = 1; n < 40; n++) {
+                FibonacciEvent event = new FibonacciEvent();
+                event.message = String.valueOf(event.fibonacci(n));
+                event.commit();
+            }
+            rs.awaitTermination(Duration.ofSeconds(30));
+            // java --enable-preview com.dariawan.jdk14.JEP349JFR
+        }
     }
-    
-    // java --enable-preview com.dariawan.jdk14.JEP358NullPointerExample
-    // java --enable-preview -XX:+ShowCodeDetailsInExceptionMessages com.dariawan.jdk14.JEP358NullPointerExample
 }

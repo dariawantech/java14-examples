@@ -36,23 +36,24 @@
  *   https://creativecommons.org/licenses/by-sa/4.0/
  *   https://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
-package com.dariawan.jdk14;
+package com.dariawan.jdk11;
 
-import com.dariawan.jdk14.dto.Employee;
-import java.time.LocalDate;
-import java.time.Month;
+import jdk.jfr.Description;
+import jdk.jfr.Event;
+import jdk.jfr.Label;
+import jdk.jfr.Name;
 
-public class JEP358NullPointerExample {
-    
-    public static void main(String[] args) {
-        Employee emp = new Employee();
-        emp.setId(1001);
-        emp.setName("Clark Kent");
-        emp.setBirthDate(LocalDate.of(1974, Month.JUNE, 18));
+@Name("Fibonacci")
+@Label("Fibonacci")
+@Description("Dariawan example: Fibonacci in Flight Recorder")
+public class FibonacciEvent extends Event {
+    @Label("Message")
+    public String message;
  
-        System.out.println(emp.getDepartment().getName());
+    public int fibonacci(int n) {
+        if (n <= 1) {
+            return n;
+        }
+        return fibonacci(n - 1) + fibonacci(n - 2);
     }
-    
-    // java --enable-preview com.dariawan.jdk14.JEP358NullPointerExample
-    // java --enable-preview -XX:+ShowCodeDetailsInExceptionMessages com.dariawan.jdk14.JEP358NullPointerExample
 }
