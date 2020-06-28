@@ -36,19 +36,23 @@
  *   https://creativecommons.org/licenses/by-sa/4.0/
  *   https://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
-package com.dariawan.jdk14.dto;
+package com.dariawan.jdk14;
 
-import java.time.LocalDate;
-import lombok.Getter;
-import lombok.Setter;
+import java.util.HashMap;
+import java.util.Map;
 
-@Getter
-@Setter
-public class Employee {
-
-    private Integer id;
-    private String name;
-    private LocalDate birthDate;
-    private Department department;
-    private Address address;
+public class JEP358NullPointerExample03 {
+    
+    public static void main(String[] args) {
+        Map<String, String> maps = new HashMap<>();
+        maps.put("key1", "value1");
+        
+        String key = maps.get("key2"); // somehow is null
+        if (key.equals("key1")) {            
+            System.out.print("key equals key1");
+        }
+    }
+    
+    // java --enable-preview com.dariawan.jdk14.JEP358NullPointerExample03
+    // java --enable-preview -XX:+ShowCodeDetailsInExceptionMessages com.dariawan.jdk14.JEP358NullPointerExample03
 }

@@ -36,19 +36,21 @@
  *   https://creativecommons.org/licenses/by-sa/4.0/
  *   https://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
-package com.dariawan.jdk14.dto;
+package com.dariawan.jdk14;
 
-import java.time.LocalDate;
-import lombok.Getter;
-import lombok.Setter;
+import com.dariawan.jdk14.dto.Customer;
 
-@Getter
-@Setter
-public class Employee {
-
-    private Integer id;
-    private String name;
-    private LocalDate birthDate;
-    private Department department;
-    private Address address;
+public class JEP358NullPointerExample01 {
+    
+    public static void main(String[] args) {
+        Customer cust = new Customer();
+        cust.setId(1);
+        cust.setName("Clark Kent");
+        
+        System.out.println(cust);
+        System.out.println(cust.getAddress().getAddressLine1());
+    }
+    
+    // java --enable-preview com.dariawan.jdk14.JEP358NullPointerExample01
+    // java --enable-preview -XX:+ShowCodeDetailsInExceptionMessages com.dariawan.jdk14.JEP358NullPointerExample01
 }

@@ -38,17 +38,17 @@
  */
 package com.dariawan.jdk14.dto;
 
-import java.time.LocalDate;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
-public class Employee {
-
-    private Integer id;
-    private String name;
-    private LocalDate birthDate;
-    private Department department;
-    private Address address;
+@ToString
+public class Address {
+    
+    private String addressLine1;
+    private String addressLine2;
+    private String addressLine3;
+    private String zipCode;
 }

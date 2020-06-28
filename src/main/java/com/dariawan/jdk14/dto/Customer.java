@@ -38,17 +38,16 @@
  */
 package com.dariawan.jdk14.dto;
 
-import java.time.LocalDate;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
-public class Employee {
-
+@ToString
+public class Customer {
+ 
     private Integer id;
     private String name;
-    private LocalDate birthDate;
-    private Department department;
     private Address address;
 }
